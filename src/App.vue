@@ -1,5 +1,5 @@
 <template>
-  <header class="row">
+  <header>
     <TheHeader/>
   </header>
   <TaskModal 
@@ -23,12 +23,50 @@ const global = useGlobalStore();
 </script>
 
 <style>
+body{
+  background-color: #f2f2f2;
+}
+
 header {
   max-width: 100%!important;
+  padding: 15px;
+  background-color: #d4d4d4;
+  margin-bottom: 30px;
 }
 
 main {
   max-width: 100%!important;
+}
+
+.btn{
+  font-weight: bold!important;
+}
+
+.btn-primary {
+  background-color: #08b2b8!important;
+  border: #08b2b8!important;
+}
+
+.btn-primary:hover {
+  background-color: #089ea3!important;
+}
+
+.btn-danger {
+  background-color: #ce3939!important;
+  border: #ce3939!important;
+}
+
+.btn-danger:hover {
+  background-color: #a82b2b!important;
+}
+
+.btn-success {
+    background-color: #11a511!important;
+  border: #11a511!important;
+}
+
+.btn-success:hover {
+  background-color: #119211!important;
 }
 
 
@@ -62,7 +100,41 @@ main {
   display: flex!important;
 }
 
-.button_kanban{
+.button_kanban {
   border-radius: 7px!important;
 }
+
+.column {
+  border: 1px solid #ccc;
+  padding: 20px 15px;
+  border-radius: 5px 5px 15px 15px;
+} 
+
+.column_task {
+  border: 1px solid #ccc;
+  padding: 8px 15px;
+  border-radius: 0px 15px 0px 15px;
+  margin-bottom: 8px
+}
+
+.column_task:hover {
+  background-color: #ccc;
+  cursor:pointer;
+}
+
+.delete_task{
+  padding: 3px;
+}
+
+.delete_task:hover{
+  background-color: rgb(216, 60, 60);
+  border-radius: 30%;
+}
+
+@media  screen and (max-width: 992px) {
+  .modal_content {
+    width: 80%!important;
+  }
+}
+
 </style>

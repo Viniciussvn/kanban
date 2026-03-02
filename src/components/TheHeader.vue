@@ -1,12 +1,18 @@
 <template>
-        <div class="col-10">
-            <h2>Kanban</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-10">
+                <h4>Kanban</h4>
+            </div>
+            <div class="col-2">
+                <div class="d-flex">
+                    <button type="button" class="btn btn-primary ms-auto me-1" @click="openCreateModal()">
+                        Nova Tarefa
+                    </button>
+                </div>
+            </div>
         </div>
-        <div class="col-2">
-            <button type="button" class="btn btn-primary" @click="openCreateModal()">
-                Nova Tarefa
-            </button>
-        </div>
+    </div>
 </template>
 
 <script setup>

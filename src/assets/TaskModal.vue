@@ -12,7 +12,7 @@
                 </div>
                 <div class="task_footer mt-4">
                     <div class="text-end">
-                        <div class="btn button_kanban btn-primary btn-sm me-4" @click="closeModal()">
+                        <div class="btn button_kanban btn-primary btn-sm me-2" @click="closeModal()">
                             NÃO
                         </div>
                         <div class="btn button_kanban btn-danger btn-sm" @click="deleteTask(task_data.id)">

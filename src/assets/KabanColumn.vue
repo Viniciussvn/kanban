@@ -1,18 +1,16 @@
 <template>
-    <div class="col-md-4 col-12">
+    <div class="col-md-4 col-12 mb-md-0 mb-5">
         <div class="column">
-            <div class="column_header">
+            <div class="column_header text-center mb-4">
                 <h2 >{{ props.title }}</h2>
             </div>
             <div class="column_main">
-                <div class="column_tasks">
-                    <div v-for="(task, key) in props.tasks" :key="key" class="column_task d-flex" @click="openTask(task.id)">
-                        <h5>{{ task.title }}</h5>
-                        <div class="btn-sm btn-danger" @click.stop="deleteTask(task.id)">❌</div>
-                    </div>
+                <div v-for="(task, key) in props.tasks" :key="key" class="column_task d-flex" @click="openTask(task.id)">
+                    <h5 class="col-11">{{ task.title }}</h5>
+                    <div class="col delete_task" @click.stop="deleteTask(task.id)">❌</div>
                 </div>
             </div>
-            <div class="column_footer">
+            <div v-if="props.type === 'todo'" class="column_footer mt-4">
                 <button type="button" class="btn btn-sm w-100 btn-primary" @click="openCreateModal()">
                     &#43
                 </button>
@@ -36,7 +34,9 @@ const props = defineProps({
     tasks: {
         required: true,
     },
-
+    type: {
+        required: false,
+    }
 });
 
 function openTask(id){

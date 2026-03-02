@@ -4,6 +4,7 @@
       <KabanColumn
         :title="'A fazer'"
         :tasks="tasks_todo"
+        :type="'todo'"
       />
       <KabanColumn
         :title="'Fazendo'"
