@@ -17,7 +17,12 @@ export const useKanbanStore = defineStore('kanban', {
         },
 
         addTask(task) {
-            this.tasks.push(task)
+            const newTask = {
+                ...task,
+                id: crypto.randomUUID()
+            }
+
+            this.tasks.push(newTask)
             saveTasks(this.tasks)
         },
 
@@ -29,8 +34,8 @@ export const useKanbanStore = defineStore('kanban', {
             }
         },
 
-        deleteTask(taskId) {
-            this.tasks = this.tasks.filter(t => t.id !== taskId)
+        deleteTask(id) {
+            this.tasks = this.tasks.filter(task => task.id !== id)
             saveTasks(this.tasks)
         }
     }

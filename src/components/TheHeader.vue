@@ -11,11 +11,14 @@
 
 <script setup>
 import { useGlobalStore } from '@/stores/global'
+import { useKanbanStore } from '@/stores/store';
 
 const global = useGlobalStore();
+const store = useKanbanStore();
 
 function openCreateModal() {
-  global.openTaskModal('create')
+    store.task = {};
+    global.openTaskModal('create')
 }
 
 </script>

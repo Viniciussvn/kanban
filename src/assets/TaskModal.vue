@@ -3,11 +3,11 @@
         <div class="modal_content">
             <div v-if="props.type === 'delete'">
                 <div class="modal_header mb-4">
-                    <h3>Você deseja deletar a task task_title ?</h3>
+                    <h3>Você deseja deletar a task <b>{{ task_data.title }}</b>?</h3>
                 </div>
                 <div class="modal_body">
                     <div class="task_desc">
-                        task_description
+                        <p>Descrição: {{ task_data.description }}</p>
                     </div>
                 </div>
                 <div class="task_footer mt-4">
@@ -15,7 +15,7 @@
                         <div class="btn button_kanban btn-primary btn-sm me-4" @click="closeModal()">
                             NÃO
                         </div>
-                        <div class="btn button_kanban btn-danger btn-sm" @click="deleteTask()">
+                        <div class="btn button_kanban btn-danger btn-sm" @click="deleteTask(task_data.id)">
                             DELETAR
                         </div>
                     </div>
@@ -56,36 +56,34 @@
                     </div>
                 </div>
                 <div v-else-if="props.type === 'edit'">
-                    <div v-if="props.type === 'create'">
-                        <div class="modal_header mb-4">
-                            <h3>Você deseja editar a tarefa de ID: {{ task_data.id }} ?</h3>
+                    <div class="modal_header mb-4">
+                        <h3>Editanto a tarefa de ID: {{ task_data.id }}</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-12">
+                            <label class="d-block mb-2" for="title">Título da tarefa</label>
+                            <input id="title"  class="w-100 task_input" v-model="task_data.title">
                         </div>
-                        <div class="row">
-                            <div class="col-md-6 col-12">
-                                <label class="d-block mb-2" for="title">Título da tarefa</label>
-                                <input id="title"  class="w-100 task_input" v-model="task_data.title">
-                            </div>
-                            <div class="col-md-6 col-12">
-                                <label class="d-block mb-2" for="status">Status</label>
-                                <select id="description" class="w-100 task_input disabled" v-model="task_data.status">
-                                    <option value="todo" default>A fazer</option>
-                                    <option value="doing">Fazendo</option>
-                                    <option value="done">Feito</option>
-                                </select>
-                            </div>
-                            <div class="col-12">
-                                <label class="d-block mb-2" for="description">Descrição</label>
-                                <input id="description" class="w-100 task_input" v-model="task_data.description">
-                            </div>
+                        <div class="col-md-6 col-12">
+                            <label class="d-block mb-2" for="status">Status</label>
+                            <select id="description" class="w-100 task_input" v-model="task_data.status">
+                                <option value="todo" default>A fazer</option>
+                                <option value="doing">Fazendo</option>
+                                <option value="done">Feito</option>
+                            </select>
                         </div>
-                        <div class="task_footer mt-4">
-                            <div class="text-end">
-                                <div class="btn button_kanban btn-primary btn-sm me-2" @click="closeModal()">
-                                    CANCELAR
-                                </div>
-                                <div class="btn button_kanban btn-success btn-sm" @click="updateTask()">
-                                    EDITAR
-                                </div>
+                        <div class="col-12">
+                            <label class="d-block mb-2" for="description">Descrição</label>
+                            <input id="description" class="w-100 task_input" v-model="task_data.description">
+                        </div>
+                    </div>
+                    <div class="task_footer mt-4">
+                        <div class="text-end">
+                            <div class="btn button_kanban btn-primary btn-sm me-2" @click="closeModal()">
+                                CANCELAR
+                            </div>
+                            <div class="btn button_kanban btn-success btn-sm" @click="updateTask()">
+                                EDITAR
                             </div>
                         </div>
                     </div>
@@ -121,12 +119,8 @@ const props = defineProps({
 });
 
 onBeforeMount(() => {
-    if(props.task_id){
-        for(let i = 0; i < store.tasks.length; i++){
-            if(store.tasks[i].id === props.task_id){
-               task_data = store.tasks[i]; 
-            };
-        };
+    if(store.task.id){
+        task_data.value = { ...store.task };
     }
 });
 
@@ -141,8 +135,13 @@ function createTask(){
 
 function updateTask(){
     store.updateTask(task_data.value)
-    global.closeTaskModal();
+    global.closeTaskModal()
 }
+
+function deleteTask(id){
+    store.deleteTask(id);
+    global.closeTaskModal();
+};
 
 </script>
 

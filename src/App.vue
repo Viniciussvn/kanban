@@ -1,76 +1,68 @@
-<script setup>
-import { RouterView } from 'vue-router'
-</script>
-
 <template>
-  <header>
-    <div class="wrapper">
-    </div>
+  <header class="row">
+    <TheHeader/>
   </header>
-
+  <TaskModal 
+    v-if="global.isTaskModalOpen" 
+    id="KanbanModal" 
+    :type="global.taskModalType"
+    :task="global.taskBeingEdited"
+    @close="global.closeTaskModal"
+  />
   <RouterView />
 </template>
 
-<style scoped>
+<script setup>
+import { RouterView } from 'vue-router'
+import TheHeader from './components/TheHeader.vue';
+import TaskModal from '@/assets/TaskModal.vue';
+import { useGlobalStore } from '@/stores/global'
+
+const global = useGlobalStore();
+
+</script>
+
+<style>
 header {
-  line-height: 1.5;
-  max-height: 100vh;
+  max-width: 100%!important;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+main {
+  max-width: 100%!important;
 }
 
-nav {
+
+.modal_kanban{
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
+  height: 100%;
+  background-color: rgba(186, 186, 186, 0.4);
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  z-index: 1000;
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
+.modal_content{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f7f7f7;;
+  padding: 20px;
+  border: 1px solid #e7e7e7;
+  border-radius: 15px;
+  box-shadow: 4px 4px 14px #adadad;
+  width: 50%; 
 }
 
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+.display_modal {
+  display: flex!important;
 }
 
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+.button_kanban{
+  border-radius: 7px!important;
 }
 </style>
