@@ -8,6 +8,7 @@ import { loadTasks, saveTasks } from '@/services/kanbanStorage'
 export const useKanbanStore = defineStore('kanban', {
     state: () => ({
         tasks: [],
+        task: {},
     }),
 
     actions: {

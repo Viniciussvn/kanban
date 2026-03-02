@@ -3,39 +3,33 @@
     <div class="row">
       <KabanColumn
         :title="'A fazer'"
-        :tasks="tasks_todo"
+        :tasks="store.tasks"
+        :status="'todo'"
       />
       <KabanColumn
         :title="'Fazendo'"
-        :tasks="tasks_doing"
+        :tasks="store.tasks"
+        :status="'doing'"
       />
       <KabanColumn
         :title="'Feito'"
-        :tasks="tasks_done"
+        :tasks="store.tasks"
+        :status="'done'"
       />
     </div>
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { onBeforeMount } from 'vue';
+import KabanColumn from '../assets/KabanColumn.vue';
 
-import { useKanbanStore } from '@/stores/store'
+import { useKanbanStore } from '@/stores/store';
 
-const kanbanStore = useKanbanStore();
+const store = useKanbanStore();
 
-import KabanColumn from './KabanColumn.vue';
-
-const tasks_todo = computed(() =>{
-  kanbanStore.tasks.filter(t=> t.state === 'todo');
-});
-
-const tasks_doing = computed(() =>{
-  kanbanStore.tasks.filter(t=> t.state === 'doing');
-});
-
-const tasks_done = computed(() =>{
-  kanbanStore.tasks.filter(t=> t.state === 'done');
+onBeforeMount(() => {
+  store.fetchTasks();
 });
 
 </script>
