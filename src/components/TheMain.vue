@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <h1 >teste</h1>
     <div class="row">
       <KabanColumn
         :title="'A fazer'"

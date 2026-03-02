@@ -13,7 +13,9 @@
                 </div>
             </div>
             <div class="column_footer">
-                <h5>botões de add etc</h5>
+                <button type="button" class="btn btn-sm w-100 btn-primary" @click="openCreateModal()">
+                    &#43
+                </button>
             </div>
         </div>
     </div>
@@ -54,5 +56,10 @@ function deleteTask(id){
     };
     global.openTaskModal('delete');
 };
+
+function openCreateModal() {
+    store.task = {};
+    global.openTaskModal('create')
+}
 
 </script>
