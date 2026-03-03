@@ -69,6 +69,11 @@ main {
   background-color: #119211!important;
 }
 
+.required_warning {
+  color: #dd0606;
+  margin-top: -15px;
+  margin-bottom: 15px;
+}
 
 .modal_kanban{
   position: fixed;
@@ -85,7 +90,7 @@ main {
 
 .modal_content{
   position: absolute;
-  top: 50%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #f7f7f7;;

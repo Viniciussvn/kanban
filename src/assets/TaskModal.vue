@@ -45,6 +45,9 @@
                         </div>
                     </div>
                     <div class="task_footer mt-4">
+                        <div class="text-start required_warning">
+                            <span v-if="requiredNotFilled">Todos os campos são obrigatórios</span>
+                        </div>
                         <div class="text-end">
                             <div class="btn button_kanban btn-primary btn-sm me-2" @click="closeModal()">
                                 CANCELAR
@@ -57,7 +60,7 @@
                 </div>
                 <div v-else-if="props.type === 'edit'">
                     <div class="modal_header mb-4">
-                        <h3>Editanto a tarefa de ID: {{ task_data.id }}</h3>
+                        <h3>Editanto a tarefa de ID: {{ store.task.title }}</h3>
                     </div>
                     <div class="row">
                         <div class="col-md-6 col-12">
@@ -78,12 +81,15 @@
                         </div>
                     </div>
                     <div class="task_footer mt-4">
+                        <div class="text-start required_warning">
+                            <span v-if="requiredNotFilled">Todos os campos são obrigatórios</span>
+                        </div>
                         <div class="text-end">
                             <div class="btn button_kanban btn-primary btn-sm me-2" @click="closeModal()">
                                 CANCELAR
                             </div>
                             <div class="btn button_kanban btn-success btn-sm" @click="updateTask()">
-                                EDITAR
+                                SALVAR
                             </div>
                         </div>
                     </div>
@@ -108,6 +114,8 @@ const task_data = ref({
     status: 'todo',
 });
 
+const requiredNotFilled = ref(false)
+
 const props = defineProps({
     type: {
         required: true,
@@ -129,11 +137,23 @@ function closeModal(){
 }
 
 function createTask(){
+    for(let key in task_data.value){
+        if(task_data.value[key] == ''){
+            requiredNotFilled.value = true
+            return
+        }
+    }
     store.addTask(task_data.value)
     global.closeTaskModal();
 }
 
 function updateTask(){
+    for(let key in task_data.value){
+        if(task_data.value[key] == ''){
+            requiredNotFilled.value = true
+            return
+        }
+    }
     store.updateTask(task_data.value)
     global.closeTaskModal()
 }
