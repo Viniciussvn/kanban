@@ -42,6 +42,7 @@ Siga os passos abaixo para rodar o projeto em sua máquina:
 -No terminal do VS Code, execute:
 
 -npm i
+
 4️⃣ Execute o projeto
 
 -Após instalar as dependências, rode:
