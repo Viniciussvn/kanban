@@ -12,12 +12,12 @@
                 </div>
                 <div class="task_footer mt-4">
                     <div class="text-end">
-                        <div class="btn button_kanban btn-primary btn-sm me-2" @click="closeModal()">
+                        <button class="btn button_kanban btn-primary btn-sm me-2" @click="closeModal()">
                             NÃO
-                        </div>
-                        <div class="btn button_kanban btn-danger btn-sm" @click="deleteTask(task_data.id)">
+                        </button>
+                        <button class="btn button_kanban btn-danger btn-sm" @click="deleteTask(task_data.id)">
                             DELETAR
-                        </div>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -26,73 +26,77 @@
                     <div class="modal_header mb-4">
                         <h3>Você deseja criar uma nova tarefa?</h3>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6 col-12">
-                            <label class="d-block mb-2" for="title">Título da tarefa</label>
-                            <input id="title"  class="w-100 task_input" v-model="task_data.title">
-                        </div>
-                        <div class="col-md-6 col-12">
-                            <label class="d-block mb-2" for="status">Status</label>
-                            <select id="description" class="w-100 task_input disabled" v-model="task_data.status" disabled>
-                                <option value="todo" default>A fazer</option>
-                                <option value="doing">Fazendo</option>
-                                <option value="done">Feito</option>
-                            </select>
-                        </div>
-                        <div class="col-12">
-                            <label class="d-block mb-2" for="description">Descrição</label>
-                            <input id="description" class="w-100 task_input" v-model="task_data.description">
-                        </div>
-                    </div>
-                    <div class="task_footer mt-4">
-                        <div class="text-start required_warning">
-                            <span v-if="requiredNotFilled">Todos os campos são obrigatórios</span>
-                        </div>
-                        <div class="text-end">
-                            <div class="btn button_kanban btn-primary btn-sm me-2" @click="closeModal()">
-                                CANCELAR
+                    <form @submit.prevent="createTask()">
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <label class="d-block mb-2" for="title">Título da tarefa</label>
+                                <input id="title"  class="w-100 task_input" v-model="task_data.title">
                             </div>
-                            <div class="btn button_kanban btn-success btn-sm" @click="createTask()">
-                                CRIAR
+                            <div class="col-md-6 col-12">
+                                <label class="d-block mb-2" for="status">Status</label>
+                                <select id="description" class="w-100 task_input disabled" v-model="task_data.status" disabled>
+                                    <option value="todo" default>A fazer</option>
+                                    <option value="doing">Fazendo</option>
+                                    <option value="done">Feito</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label class="d-block mb-2" for="description">Descrição</label>
+                                <input id="description" class="w-100 task_input" v-model="task_data.description">
                             </div>
                         </div>
-                    </div>
+                        <div class="task_footer mt-4">
+                            <div class="text-start required_warning">
+                                <span v-if="requiredNotFilled">Todos os campos são obrigatórios</span>
+                            </div>
+                            <div class="text-end">
+                                <div class="btn button_kanban btn-primary btn-sm me-2" @click="closeModal()">
+                                    CANCELAR
+                                </div>
+                                <button type="submit" class="btn button_kanban btn-success btn-sm" >
+                                    CRIAR
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <div v-else-if="props.type === 'edit'">
-                    <div class="modal_header mb-4">
-                        <h3>Editanto a tarefa de ID: {{ store.task.title }}</h3>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-12">
-                            <label class="d-block mb-2" for="title">Título da tarefa</label>
-                            <input id="title"  class="w-100 task_input" v-model="task_data.title">
+                    <form @submit.prevent="updateTask()">
+                        <div class="modal_header mb-4">
+                            <h3>Editanto a tarefa de ID: {{ store.task.title }}</h3>
                         </div>
-                        <div class="col-md-6 col-12">
-                            <label class="d-block mb-2" for="status">Status</label>
-                            <select id="description" class="w-100 task_input" v-model="task_data.status">
-                                <option value="todo" default>A fazer</option>
-                                <option value="doing">Fazendo</option>
-                                <option value="done">Feito</option>
-                            </select>
-                        </div>
-                        <div class="col-12">
-                            <label class="d-block mb-2" for="description">Descrição</label>
-                            <input id="description" class="w-100 task_input" v-model="task_data.description">
-                        </div>
-                    </div>
-                    <div class="task_footer mt-4">
-                        <div class="text-start required_warning">
-                            <span v-if="requiredNotFilled">Todos os campos são obrigatórios</span>
-                        </div>
-                        <div class="text-end">
-                            <div class="btn button_kanban btn-primary btn-sm me-2" @click="closeModal()">
-                                CANCELAR
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <label class="d-block mb-2" for="title">Título da tarefa</label>
+                                <input id="title"  class="w-100 task_input" v-model="task_data.title">
                             </div>
-                            <div class="btn button_kanban btn-success btn-sm" @click="updateTask()">
-                                SALVAR
+                            <div class="col-md-6 col-12">
+                                <label class="d-block mb-2" for="status">Status</label>
+                                <select id="description" class="w-100 task_input" v-model="task_data.status">
+                                    <option value="todo" default>A fazer</option>
+                                    <option value="doing">Fazendo</option>
+                                    <option value="done">Feito</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label class="d-block mb-2" for="description">Descrição</label>
+                                <input id="description" class="w-100 task_input" v-model="task_data.description">
                             </div>
                         </div>
-                    </div>
+                        <div class="task_footer mt-4">
+                            <div class="text-start required_warning">
+                                <span v-if="requiredNotFilled">Todos os campos são obrigatórios</span>
+                            </div>
+                            <div class="text-end">
+                                <div class="btn button_kanban btn-primary btn-sm me-2" @click="closeModal()">
+                                    CANCELAR
+                                </div>
+                                <button type="submit" class="btn button_kanban btn-success btn-sm">
+                                    SALVAR
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
