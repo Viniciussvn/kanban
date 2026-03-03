@@ -22,7 +22,7 @@ Siga os passos abaixo para rodar o projeto em sua máquina:
 
 1️⃣ Clone o repositório
 
--[git clone https://github.com/seu-usuario/kanban-main.git](https://github.com/Viniciussvn/kanban.git)
+-git clone https://github.com/Viniciussvn/kanban.git
  
  (ou baixe o zip e siga o próximo passo)
 
