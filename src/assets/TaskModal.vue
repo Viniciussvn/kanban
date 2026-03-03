@@ -138,7 +138,7 @@ function closeModal(){
 
 function createTask(){
     for(let key in task_data.value){
-        if(task_data.value[key] == ''){
+        if(task_data.value[key] === ''){
             requiredNotFilled.value = true
             return
         }
@@ -149,7 +149,7 @@ function createTask(){
 
 function updateTask(){
     for(let key in task_data.value){
-        if(task_data.value[key] == ''){
+        if(task_data.value[key] === ''){
             requiredNotFilled.value = true
             return
         }
