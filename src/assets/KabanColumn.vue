@@ -4,13 +4,25 @@
             <div class="column_header text-center mb-4">
                 <h2 >{{ props.title }}</h2>
             </div>
-            <div class="column_main">
-                <div v-for="(task, key) in props.tasks" :key="key" class="column_task d-flex" @click="openTask(task.id)">
-                    <h5 class="col-11">{{ task.title }}</h5>
-                    <div class="col delete_task" @click.stop="deleteTask(task.id)">❌</div>
-                </div>
-            </div>
-            <div v-if="props.type === 'todo'" class="column_footer mt-4">
+            <draggableComponent
+                class="column_main"
+                :model-value="tasks"
+                group="tasks"
+                item-key="id"
+                @change="onChange"
+                :animation="250"
+                ghost-class="ghost"
+            >
+                <template #item="{ element }">
+                    <div v-if="element.status === props.status">
+                        <div class="column_task d-flex" @click="openTask(element.id)">
+                            <h5 class="col-11">{{ element.title }}</h5>
+                            <div class="col delete_task" @click.stop="deleteTask(element.id)">❌</div>
+                        </div>
+                    </div>
+                </template>
+            </draggableComponent>
+            <div v-if="props.status === 'todo'" class="column_footer mt-4">
                 <button type="button" class="btn btn-sm w-100 btn-primary" @click="openCreateModal()">
                     &#43
                 </button>
@@ -22,6 +34,7 @@
 <script setup>
 import { useGlobalStore } from '@/stores/global';
 import { useKanbanStore } from '@/stores/store';
+import draggableComponent from 'vuedraggable';
 
 const global = useGlobalStore();
 const store = useKanbanStore();
@@ -31,13 +44,18 @@ const props = defineProps({
         required: true,
         type: String
     },
-    tasks: {
+    tasks:{
         required: true,
     },
-    type: {
+    status: {
         required: false,
     }
 });
+
+function openCreateModal() {
+    store.task = {};
+    global.openTaskModal('create')
+}
 
 function openTask(id){
     for(let i = 0; i < props.tasks.length; i++){
@@ -57,9 +75,21 @@ function deleteTask(id){
     global.openTaskModal('delete');
 };
 
-function openCreateModal() {
-    store.task = {};
-    global.openTaskModal('create')
-}
+function onChange(event) {
+    if (!event.moved && !event.added) return
+
+    if (event.moved) {
+        const { oldIndex, newIndex } = event.moved
+        store.reorderByIndex(props.status, oldIndex, newIndex)
+    }
+
+    if (event.added) {
+        const { element, newIndex } = event.added
+
+        element.status = props.status
+
+        store.insertAtIndex(props.status, element, newIndex)
+    }
+};
 
 </script>

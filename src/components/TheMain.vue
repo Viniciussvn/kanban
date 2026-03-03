@@ -4,15 +4,17 @@
       <KabanColumn
         :title="'A fazer'"
         :tasks="tasks_todo"
-        :type="'todo'"
+        :status="'todo'"
       />
       <KabanColumn
         :title="'Fazendo'"
         :tasks="tasks_doing"
+        :status="'doing'"
       />
       <KabanColumn
         :title="'Feito'"
         :tasks="tasks_done"
+        :status="'done'"
       />
     </div>
   </div>
@@ -31,15 +33,15 @@ onBeforeMount(() => {
 });
 
 const tasks_todo = computed(() =>{
-  return store.tasks.filter(t=> t.status === 'todo');
+  return store.tasks.filter(t=> t.status === 'todo').sort((a, b) => a.order - b.order);
 });
 
 const tasks_doing = computed(() =>{
-  return store.tasks.filter(t=> t.status === 'doing');
+  return store.tasks.filter(t=> t.status === 'doing').sort((a, b) => a.order - b.order);
 });
 
 const tasks_done = computed(() =>{
-  return store.tasks.filter(t=> t.status === 'done');
+  return store.tasks.filter(t=> t.status === 'done').sort((a, b) => a.order - b.order);
 });
 
 </script>

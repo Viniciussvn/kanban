@@ -115,11 +115,21 @@ main {
   border-radius: 5px 5px 15px 15px;
 } 
 
+.column_main {
+  display: grid;
+  gap: 12px;
+  transition: all 0.25s ease;
+}
+
+.column_task:hover {
+  transform: scale(1.02);
+}
+
 .column_task {
   border: 1px solid #ccc;
   padding: 8px 15px;
   border-radius: 0px 15px 0px 15px;
-  margin-bottom: 8px
+  margin-bottom: 8px;
 }
 
 .column_task:hover {
