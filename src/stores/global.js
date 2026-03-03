@@ -4,7 +4,7 @@ export const useGlobalStore = defineStore('global', {
   state: () => ({
     isTaskModalOpen: false,
     taskModalType: 'create',
-    taskBeingEdited: null
+    taskBeingEdited: null,
   }),
 
   actions: {
@@ -17,6 +17,6 @@ export const useGlobalStore = defineStore('global', {
     closeTaskModal() {
       this.isTaskModalOpen = false
       this.taskBeingEdited = null
-    }
-  }
+    },
+  },
 })

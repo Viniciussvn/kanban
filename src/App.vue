@@ -1,10 +1,10 @@
 <template>
   <header>
-    <TheHeader/>
+    <TheHeader />
   </header>
-  <TaskModal 
-    v-if="global.isTaskModalOpen" 
-    id="KanbanModal" 
+  <TaskModal
+    v-if="global.isTaskModalOpen"
+    id="KanbanModal"
     :type="global.taskModalType"
     :task="global.taskBeingEdited"
     @close="global.closeTaskModal"
@@ -14,59 +14,58 @@
 
 <script setup>
 import { RouterView } from 'vue-router'
-import TheHeader from './components/TheHeader.vue';
-import TaskModal from '@/assets/TaskModal.vue';
+import TheHeader from './components/TheHeader.vue'
+import TaskModal from '@/assets/TaskModal.vue'
 import { useGlobalStore } from '@/stores/global'
 
-const global = useGlobalStore();
-
+const global = useGlobalStore()
 </script>
 
 <style>
-body{
+body {
   background-color: #f2f2f2;
 }
 
 header {
-  max-width: 100%!important;
+  max-width: 100% !important;
   padding: 15px;
   background-color: #d4d4d4;
   margin-bottom: 30px;
 }
 
 main {
-  max-width: 100%!important;
+  max-width: 100% !important;
 }
 
-.btn{
-  font-weight: bold!important;
+.btn {
+  font-weight: bold !important;
 }
 
 .btn-primary {
-  background-color: #08b2b8!important;
-  border: #08b2b8!important;
+  background-color: #08b2b8 !important;
+  border: #08b2b8 !important;
 }
 
 .btn-primary:hover {
-  background-color: #089ea3!important;
+  background-color: #089ea3 !important;
 }
 
 .btn-danger {
-  background-color: #ce3939!important;
-  border: #ce3939!important;
+  background-color: #ce3939 !important;
+  border: #ce3939 !important;
 }
 
 .btn-danger:hover {
-  background-color: #a82b2b!important;
+  background-color: #a82b2b !important;
 }
 
 .btn-success {
-    background-color: #11a511!important;
-  border: #11a511!important;
+  background-color: #11a511 !important;
+  border: #11a511 !important;
 }
 
 .btn-success:hover {
-  background-color: #119211!important;
+  background-color: #119211 !important;
 }
 
 .required_warning {
@@ -75,45 +74,45 @@ main {
   margin-bottom: 15px;
 }
 
-.modal_kanban{
+.modal_kanban {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(186, 186, 186, 0.4);
-  display: flex; 
-  align-items: center; 
+  display: flex;
+  align-items: center;
   justify-content: center;
   z-index: 1000;
 }
 
-.modal_content{
+.modal_content {
   position: absolute;
   top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #f7f7f7;;
+  background-color: #f7f7f7;
   padding: 20px;
   border: 1px solid #e7e7e7;
   border-radius: 15px;
   box-shadow: 4px 4px 14px #adadad;
-  width: 50%; 
+  width: 50%;
 }
 
 .display_modal {
-  display: flex!important;
+  display: flex !important;
 }
 
 .button_kanban {
-  border-radius: 7px!important;
+  border-radius: 7px !important;
 }
 
 .column {
   border: 1px solid #ccc;
   padding: 20px 15px;
   border-radius: 5px 5px 15px 15px;
-} 
+}
 
 .column_main {
   display: grid;
@@ -134,22 +133,21 @@ main {
 
 .column_task:hover {
   background-color: #ccc;
-  cursor:pointer;
+  cursor: pointer;
 }
 
-.delete_task{
+.delete_task {
   padding: 3px;
 }
 
-.delete_task:hover{
+.delete_task:hover {
   background-color: rgb(216, 60, 60);
   border-radius: 30%;
 }
 
-@media  screen and (max-width: 992px) {
+@media screen and (max-width: 992px) {
   .modal_content {
-    width: 80%!important;
+    width: 80% !important;
   }
 }
-
 </style>

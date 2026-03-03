@@ -12,5 +12,5 @@ app.use(router)
 app.mount('#app')
 
 //BOOTSTRAP
-import "bootstrap/dist/css/bootstrap.min.css"
-import "bootstrap"
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap'
